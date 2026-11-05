@@ -1,6 +1,7 @@
-import { Link, useSearchParams } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
 import styles from "./Search.module.css";
+import SearchBar from "../components/SearchBar.jsx";
 
 // VITE가 불러들여준 환경변수를 꺼낼 때는 function 밖에서 -> export 처리 하기 위해서
 
@@ -39,9 +40,16 @@ function Search() {
             .finally(() => setLoading(false));
     }, []);
 
+    // 검색 결과를 담당하는 Search 컴포넌트에서도
+    // 검색이 가능하도록 설계 변경 하니,
+    // Home에 있는 내용과 다르지 않음을 확인
+    //      => 컴포넌트 분리를 고려
+
     return (
         <div className={styles.container}>
             <h3>검색 결과 : {keyword}</h3>
+
+            <SearchBar />
 
             {loading ? (
                 <div className={styles.message}>로딩 중입니다...</div>
